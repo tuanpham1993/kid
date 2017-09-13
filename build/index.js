@@ -9811,6 +9811,7 @@ var App = function (_React$Component2) {
       currentPoint: 10
     };
     _this2.handle = _this2.handle.bind(_this2);
+    _this2.suggest = _this2.suggest.bind(_this2);
     return _this2;
   }
 
@@ -9822,11 +9823,20 @@ var App = function (_React$Component2) {
   }, {
     key: 'check',
     value: function check() {
+      if (this.state.index === words.count) {
+        return;
+      }
       if (words[this.state.index] === this.state.value) {
         this.setState({ index: this.state.index + 1, value: '' });
       } else if (this.state.currentPoint > 0) {
         this.setState({ currentPoint: this.state.currentPoint - point });
       }
+    }
+  }, {
+    key: 'suggest',
+    value: function suggest() {
+      alert(words[this.state.index]);
+      this.setState({ currentPoint: this.state.currentPoint - 1 });
     }
   }, {
     key: 'handleChange',
@@ -9856,8 +9866,8 @@ var App = function (_React$Component2) {
           }, onKeyPress: this.handle }),
         _react2.default.createElement(
           'button',
-          { onClick: this.check },
-          'Ti\u1EBFp'
+          { onClick: this.suggest },
+          'Suggest'
         ),
         _react2.default.createElement(
           'label',

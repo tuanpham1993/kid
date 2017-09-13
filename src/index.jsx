@@ -34,6 +34,7 @@ class App extends React.Component {
       currentPoint: 10
     }
     this.handle = this.handle.bind(this);
+    this.suggest = this.suggest.bind(this);
   }
   render() {
     return this.renderImage(0);
@@ -48,6 +49,11 @@ class App extends React.Component {
     } else if (this.state.currentPoint > 0) {
       this.setState({currentPoint: this.state.currentPoint - point});
     }
+  }
+
+  suggest() {
+    alert(words[this.state.index]);
+    this.setState({currentPoint: this.state.currentPoint - 1});
   }
 
   handleChange(value) {
@@ -67,8 +73,8 @@ class App extends React.Component {
       <div className="app-container">
         <Image index={this.state.index} />
         <input type="text" placeholder="Type here" value={this.state.value} onChange={(e) => this.handleChange(e.target.value)} onKeyPress={this.handle}/>
-        <button onClick={ this.check }>
-          Tiếp
+        <button onClick={ this.suggest }>
+          Suggest
         </button>
         <label>{this.state.currentPoint}</label>
         <br/>
