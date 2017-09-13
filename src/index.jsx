@@ -40,6 +40,9 @@ class App extends React.Component {
   }
 
   check() {
+    if (this.state.index === words.count) {
+      return;
+    }
     if (words[this.state.index] === this.state.value) {
       this.setState({index: this.state.index + 1, value: ''});
     } else if (this.state.currentPoint > 0) {
