@@ -9810,6 +9810,7 @@ var App = function (_React$Component2) {
       value: '',
       currentPoint: 10
     };
+    _this2.handle = _this2.handle.bind(_this2);
     return _this2;
   }
 
@@ -9838,7 +9839,7 @@ var App = function (_React$Component2) {
     key: 'handle',
     value: function handle(e) {
       if (e.key === 'Enter') {
-        this.check.bind(this);
+        this.check();
       }
     }
   }, {
@@ -9855,7 +9856,7 @@ var App = function (_React$Component2) {
           }, onKeyPress: this.handle }),
         _react2.default.createElement(
           'button',
-          { onClick: this.check.bind(this) },
+          { onClick: this.check },
           'Ti\u1EBFp'
         ),
         _react2.default.createElement(

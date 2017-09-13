@@ -33,6 +33,7 @@ class App extends React.Component {
       value: '',
       currentPoint: 10
     }
+    this.handle = this.handle.bind(this);
   }
   render() {
     return this.renderImage(0);
@@ -54,7 +55,7 @@ class App extends React.Component {
 
   handle(e) {
     if(e.key === 'Enter') {
-      this.check.bind(this);
+      this.check();
     }
   }
 
@@ -63,14 +64,13 @@ class App extends React.Component {
       <div className="app-container">
         <Image index={this.state.index} />
         <input type="text" placeholder="Type here" value={this.state.value} onChange={(e) => this.handleChange(e.target.value)} onKeyPress={this.handle}/>
-        <button onClick={ this.check.bind(this) }>
+        <button onClick={ this.check }>
           Tiếp
         </button>
         <label>{this.state.currentPoint}</label>
         <br/>
         <label>{this.state.index + 1}</label><span>/{words.length}</span>
       </div>
-
     );
   }
 }
