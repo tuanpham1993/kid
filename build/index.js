@@ -9758,57 +9758,131 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ShoppingList = function (_React$Component) {
-  _inherits(ShoppingList, _React$Component);
+var words = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'red', 'blue', 'yellow', 'grey', 'orange', 'black', 'pink', 'brown', 'white', 'green', 'dog', 'cat', 'elephant', 'chicken', 'monkey', 'bear', 'fish', 'bird', 'goat', 'pig'];
 
-  function ShoppingList() {
-    _classCallCheck(this, ShoppingList);
+var point = 10 / words.length;
 
-    return _possibleConstructorReturn(this, (ShoppingList.__proto__ || Object.getPrototypeOf(ShoppingList)).apply(this, arguments));
+var shuffle = function shuffle(a) {
+  for (var i = a.length; i; i--) {
+    var j = Math.floor(Math.random() * i);
+    var _ref = [a[j], a[i - 1]];
+    a[i - 1] = _ref[0];
+    a[j] = _ref[1];
+  }
+};
+
+shuffle(words);
+
+var Image = function (_React$Component) {
+  _inherits(Image, _React$Component);
+
+  function Image() {
+    _classCallCheck(this, Image);
+
+    return _possibleConstructorReturn(this, (Image.__proto__ || Object.getPrototypeOf(Image)).apply(this, arguments));
   }
 
-  _createClass(ShoppingList, [{
+  _createClass(Image, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'shopping-list' },
+        null,
+        _react2.default.createElement('img', { width: '100', height: '100', src: 'src/img/' + words[this.props.index] + '.png' }),
+        _react2.default.createElement('img', { width: '100', height: '100', src: 'src/img/' + words[this.props.index] + '.jpg' })
+      );
+    }
+  }]);
+
+  return Image;
+}(_react2.default.Component);
+
+var App = function (_React$Component2) {
+  _inherits(App, _React$Component2);
+
+  function App() {
+    _classCallCheck(this, App);
+
+    var _this2 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+
+    _this2.state = {
+      index: 0,
+      value: '',
+      currentPoint: 10
+    };
+    return _this2;
+  }
+
+  _createClass(App, [{
+    key: 'render',
+    value: function render() {
+      return this.renderImage(0);
+    }
+  }, {
+    key: 'check',
+    value: function check() {
+      if (words[this.state.index] === this.state.value) {
+        this.setState({ index: this.state.index + 1, value: '' });
+      } else if (this.state.currentPoint > 0) {
+        this.setState({ currentPoint: this.state.currentPoint - point });
+      }
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(value) {
+      this.setState({
+        value: value
+      });
+    }
+  }, {
+    key: 'handle',
+    value: function handle(e) {
+      if (e.key === 'Enter') {
+        this.check.bind(this);
+      }
+    }
+  }, {
+    key: 'renderImage',
+    value: function renderImage() {
+      var _this3 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'app-container' },
+        _react2.default.createElement(Image, { index: this.state.index }),
+        _react2.default.createElement('input', { type: 'text', placeholder: 'Type here', value: this.state.value, onChange: function onChange(e) {
+            return _this3.handleChange(e.target.value);
+          }, onKeyPress: this.handle }),
         _react2.default.createElement(
-          'h1',
-          null,
-          'Shopping List for ',
-          this.props.name
+          'button',
+          { onClick: this.check.bind(this) },
+          'Ti\u1EBFp'
         ),
         _react2.default.createElement(
-          'ul',
+          'label',
           null,
-          _react2.default.createElement(
-            'li',
-            null,
-            'Instagram'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            'WhatsApp'
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            'Oculus'
-          )
+          this.state.currentPoint
+        ),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'label',
+          null,
+          this.state.index + 1
+        ),
+        _react2.default.createElement(
+          'span',
+          null,
+          '/',
+          words.length
         )
       );
     }
   }]);
 
-  return ShoppingList;
+  return App;
 }(_react2.default.Component);
 
-_reactDom2.default.render(_react2.default.createElement(ShoppingList, { name: 'Mark' }), document.getElementById('root'));
-
-var words = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
-words.forEach(function (element) {}, undefined);
+_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root'));
 
 /***/ }),
 /* 82 */
